@@ -23,6 +23,8 @@ A huge thanks to these amazing people who are helping build a world with better 
 
 Interested in joining us? Just comment on an issue you’d like to work on or ask any questions you have in our [Discord community](https://discord.gg/fxd6uHbdBt). We always appreciate new contributors!
 
+Please note that we are unable to offer monetary compensation.
+
 ## Features
 The first feature we’ll develop is study groups, which includes a Q&A board, a group chat, and a section for shared materials. Additionally, the first version includes a personal dashboard, a user profile page, and a settings page. Feel free to check out the Figma prototype of [StudyCrew 0.1](https://www.figma.com/design/1Z1NIZIPE7TTqQXM7xk8av/StudyCrew-Prototype?node-id=0-1&t=vPRN1e1icTnXHebJ-1)! For future versions, we consider implementing tutoring, learning paths, shared flashcards, and more.
 
