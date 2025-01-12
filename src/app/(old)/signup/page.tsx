@@ -1,11 +1,13 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import LogoWhite from '../../../public/assets/LogoWhite.svg'
-import { PiHouseDuotone } from 'react-icons/pi'
-import { PiUsersDuotone } from 'react-icons/pi'
-import { PiGearDuotone } from 'react-icons/pi'
-import { PiUserDuotone } from 'react-icons/pi'
+import LogoWhite from 'public/assets/LogoWhite.svg'
+import {
+  PiGearDuotone,
+  PiHouseDuotone,
+  PiUserDuotone,
+  PiUsersDuotone
+} from 'react-icons/pi'
 import Button from '@/components/ui/button'
 import { signup } from './actions'
 import { GoogleOauthButton } from '@/components/widgets/auth/GoogleOauthButton'

@@ -6,7 +6,7 @@ import { type User } from '@supabase/supabase-js'
 import Image from 'next/image'
 import Avatar from './avatar'
 import Button from '@/components/ui/button'
-import Logo from '../../../public/assets/Logo.svg'
+import Logo from 'public/assets/Logo.svg'
 import { Switch } from '@/components/ui/switch'
 
 interface AccountFormProps {
@@ -98,7 +98,7 @@ export default function AccountForm({ user }: AccountFormProps): JSX.Element {
       await updateProfile({
         name,
         about,
-        avatar,
+        avatar
       })
       await updateSettings({ showGroups, emailNotifications })
     } catch (error) {

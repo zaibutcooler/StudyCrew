@@ -8,6 +8,7 @@ import React, { PropsWithChildren } from 'react'
 
 import '@/app/globals.css'
 import metadataConfig from '@/config/metadata'
+import AuthProvider from '@/services/providers/auth-provider'
 
 const { GOOGLE_ANALYTICS_ID } = process.env
 
@@ -24,8 +25,10 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <Link rel="shortcut icon" href="/public/assets/favicon.ico" />
       </Head>
       <body>
-        {children}
-        <Toaster />
+        <AuthProvider>
+          {children}
+          <Toaster />
+        </AuthProvider>
       </body>
 
       {process.browser && !_isEmpty(GOOGLE_ANALYTICS_ID) && (

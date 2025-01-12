@@ -1,11 +1,10 @@
-import { login } from './actions'
 import Image from 'next/image'
 import Link from 'next/link'
-import LogoWhite from '../../../public/assets/LogoWhite.svg'
-import Button from '@/components/ui/button'
+import LogoWhite from 'public/assets/LogoWhite.svg'
 import { GoogleOauthButton } from '@/components/widgets/auth/GoogleOauthButton'
+import { SignInForm } from '@/app/(auth)/sign-in/form'
 
-export default function LoginPage(): JSX.Element {
+export default function SignInPage() {
   return (
     <div className="container m-5 p-0 flex w-full gap-10">
       <div className="flex flex-col max-w-[35vw] h-[78vh] justify-around rounded-lg bg-primary-500 px-[46px] py-[70px] gap-20">
@@ -54,35 +53,9 @@ export default function LoginPage(): JSX.Element {
           <span className="px-4 text-gray-500 bg-white">Or continue with</span>
           <div className="flex-grow border-t border-gray-500"></div>
         </div>
-        <form className="flex flex-col mt-[20px] gap-[20px] w-full">
-          <div className="flex flex-col">
-            <label htmlFor="email">Email:</label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              className="rounded-lg border border-grey px-3 h-12"
-              placeholder="email@address.com"
-              required
-            />
-          </div>
-          <div className="flex flex-col">
-            <label htmlFor="password">Password:</label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              className="rounded-lg border border-grey px-3 h-12"
-              placeholder="*****"
-              required
-            />
-          </div>
-          <Button
-            formAction={login}
-            text="Log in"
-            className="uppercase py-2 bg-primary-500 text-white h-[40px] rounded-lg mt-4"
-          />
-        </form>
+        <div className={'mt-[20px] w-full'}>
+          <SignInForm />
+        </div>
       </div>
     </div>
   )

@@ -178,7 +178,7 @@ function Avatar({
             className="bg-primary-500 p-2.5 rounded-lg"
           >
             <Image
-              src={require('../../../public/assets/icons/Vector.svg')}
+              src={require('public/assets/icons/Vector.svg')}
               alt="Dice"
               width={21}
               height={21}
