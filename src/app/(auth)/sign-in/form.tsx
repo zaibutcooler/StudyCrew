@@ -2,11 +2,14 @@
 
 import React from 'react'
 import Button from '@/components/ui/button'
-import { signIn } from '@/server/actions/authentication'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form, FormField } from '@/components/ui/form'
+import { useRouter, useSearchParams } from 'next/navigation'
+import routes from '@/config/routes'
+import { useToast } from '@/hooks/use-toast'
+import { useSupabaseClient } from '@/hooks/use-supabase'
 
 const signInSchema = z.object({
   email: z.string().email(),
@@ -16,12 +19,44 @@ const signInSchema = z.object({
 export type SignInSchemaType = z.infer<typeof signInSchema>
 
 export const SignInForm: React.FC = () => {
+  const supabase = useSupabaseClient()
   const form = useForm<SignInSchemaType>({
     resolver: zodResolver(signInSchema)
   })
+  const searchParams = useSearchParams()
+  const router = useRouter()
+  const toaster = useToast()
 
-  const onSignIn = async (data: SignInSchemaType) => {
-    const response = await signIn(data)
+  const onSignIn = async (values: SignInSchemaType) => {
+    const { error, data } = await supabase.auth.signInWithPassword(values)
+
+    if (error) {
+      toaster.toast({
+        title: error.name || 'Error',
+        description:
+          error.message || "We couldn't sign you in. Please try again.",
+        variant: 'destructive'
+      })
+      return
+    }
+
+    const redirect = searchParams.get('redirect')
+
+    if (redirect == 'profile') {
+      toaster.toast({
+        title: 'Successful',
+        description: 'You can create your account now!'
+      })
+
+      router.push(routes.CREATE_PROFILE)
+      return
+    }
+
+    toaster.toast({
+      title: 'Successful',
+      description: "You've successfully signed in."
+    })
+    router.push(routes.DASHBOARD)
   }
 
   return (

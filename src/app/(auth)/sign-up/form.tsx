@@ -6,7 +6,10 @@ import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form, FormField } from '@/components/ui/form'
-import { signUp } from '@/server/actions/authentication'
+import routes from '@/config/routes'
+import { useRouter } from 'next/navigation'
+import { useToast } from '@/hooks/use-toast'
+import { useSupabaseClient } from '@/hooks/use-supabase'
 
 const signUpSchema = z.object({
   email: z.string().email(),
@@ -16,19 +19,33 @@ const signUpSchema = z.object({
 export type SignUpSchemaType = z.infer<typeof signUpSchema>
 
 export const SignUpForm: React.FC = () => {
+  const supabase = useSupabaseClient()
   const form = useForm<SignUpSchemaType>({
     resolver: zodResolver(signUpSchema)
   })
+  const router = useRouter()
+  const toaster = useToast()
 
-  const onSignUp = async (data: SignUpSchemaType) => {
-    const response = await signUp(data)
+  const onSignUp = async (values: SignUpSchemaType) => {
+    const response = await supabase.auth.signUp(values)
 
     if (response.error) {
-      window.alert(response.error)
+      toaster.toast({
+        title: response.error.name,
+        description: response.error.message,
+        variant: 'destructive'
+      })
+      console.log('[SIGN_UP_ERROR]', response.error)
       return
     }
 
-    window.alert('SUCCESS')
+    toaster.toast({
+      title: 'Successful',
+      description:
+        "You've successfully signed up. please confirm your email and continue"
+    })
+
+    router.push(routes.SIGN_IN + '?redirect=profile')
   }
 
   return (
