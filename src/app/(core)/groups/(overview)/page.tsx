@@ -1,21 +1,19 @@
 'use client'
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import GroupCard from '@/components/GroupCard'
-import { createClient } from '../../../../utils/supabase/client'
 import Image from 'next/image'
 import Button from '@/components/ui/button'
 import { HiMagnifyingGlass } from 'react-icons/hi2'
 import Science from '../../../../../public/assets/icons/Science.svg'
 import { getLoggedInUser } from '@/utils/actions/user.actions'
-import { Group, User, Admin } from '@/types/index'
+import { Admin, Group, User } from '@/types/index'
 import { GroupSubject } from '@/types/models/index'
 import MyGroups from '@/components/MyGroups'
-import { PiUsersFour } from 'react-icons/pi'
+import { PiGlobeStand, PiLaptop, PiUsersFour } from 'react-icons/pi'
 import { CiCalculator1 } from 'react-icons/ci'
 import { HiOutlineBookOpen } from 'react-icons/hi'
-import { PiGlobeStand } from 'react-icons/pi'
-import { PiLaptop } from 'react-icons/pi'
 import { LuLanguages } from 'react-icons/lu'
+import { useSupabaseClient } from '@/hooks/use-supabase'
 
 const SUBJECTS = [
   {
@@ -56,7 +54,7 @@ const SUBJECTS = [
 ]
 
 export default function GroupsPage(): JSX.Element {
-  const supabase = createClient()
+  const supabase = useSupabaseClient()
   const [exploreGroups, setExploreGroups] = useState<Group[]>([])
   const [loading, setLoading] = useState<boolean>(false)
   const [selectedSubject, setSelectedSubject] = useState<GroupSubject>(

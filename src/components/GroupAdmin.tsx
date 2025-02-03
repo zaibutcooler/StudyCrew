@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { createClient } from '../utils/supabase/client';
-import Image from 'next/image';
+import React, { useEffect, useState } from 'react'
+import Image from 'next/image'
+import { useSupabaseClient } from '@/hooks/use-supabase'
 
 interface GroupAdminProps {
-  adminId: string;
+  adminId: string
 }
 
 function GroupAdmin({ adminId }: GroupAdminProps) {
-  const supabase = createClient();
-  const [admin, setAdmin] = useState<{ name: string; avatar: string } | null>(null);
+  const supabase = useSupabaseClient()
+  const [admin, setAdmin] = useState<{ name: string; avatar: string } | null>(
+    null
+  )
 
   useEffect(() => {
     const fetchAdminData = async () => {
@@ -17,26 +19,26 @@ function GroupAdmin({ adminId }: GroupAdminProps) {
           .from('users')
           .select('name, avatar')
           .eq('user_id', adminId)
-          .single();
+          .single()
 
         if (error) {
-          console.error('Error fetching admin data:', error);
-          return;
+          console.error('Error fetching admin data:', error)
+          return
         }
 
         if (data) {
-          setAdmin(data);
+          setAdmin(data)
         }
       } catch (error) {
-        console.error('Error fetching admin data:', error);
+        console.error('Error fetching admin data:', error)
       }
-    };
+    }
 
-    fetchAdminData();
-  }, [supabase, adminId]);
+    fetchAdminData()
+  }, [supabase, adminId])
 
   if (!admin) {
-    return <p className="text-[14px] font-bold text-red-400">No admin found</p>;
+    return <p className="text-[14px] font-bold text-red-400">No admin found</p>
   }
 
   return (
@@ -52,7 +54,7 @@ function GroupAdmin({ adminId }: GroupAdminProps) {
       </div>
       <p className="text-[14px] font-bold">{admin.name}</p>
     </div>
-  );
+  )
 }
 
-export default GroupAdmin;
+export default GroupAdmin

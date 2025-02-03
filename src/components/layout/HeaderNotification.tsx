@@ -2,12 +2,12 @@
 
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import React, { useEffect, useState } from 'react'
-import { createClient } from '@/utils/supabase/client'
 import Link from 'next/link'
 import { Bell } from '@phosphor-icons/react'
+import { useSupabaseClient } from '@/hooks/use-supabase'
 
 const HeaderNotification: React.FC = () => {
-  const supabase = createClient()
+  const supabase = useSupabaseClient()
   const [isRead, setIsRead] = useState<boolean>(false)
 
   useEffect(() => {
