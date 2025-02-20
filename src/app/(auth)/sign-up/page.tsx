@@ -10,6 +10,7 @@ import Link from 'next/link'
 import { GoogleOauthButton } from '@/components/widgets/auth/GoogleOauthButton'
 import React from 'react'
 import { SignUpForm } from '@/app/(auth)/sign-up/form'
+import routes from '@/config/routes'
 
 export default function SignUpPage() {
   const OurFeatures = [
@@ -66,7 +67,7 @@ export default function SignUpPage() {
         <h2 className="fontFamily-rubik font-bold text-[40px]">Sign Up</h2>
         <p className="text-[22px] mt-3">
           Already have an account?{' '}
-          <Link href="/login" className="text-primary-500 underline">
+          <Link href={routes.SIGN_IN} className="text-primary-500 underline">
             Log in
           </Link>
         </p>

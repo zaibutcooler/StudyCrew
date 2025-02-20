@@ -175,20 +175,26 @@ export default function AccountForm({ user }: AccountFormProps): JSX.Element {
                   name="showGroups"
                   control={form.control}
                   render={({ field }) => (
-                    <Switch
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
+                    <div className="flex justify-between items-center">
+                      <p>Show Study Groups on Profile</p>
+                      <Switch
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </div>
                   )}
                 />
                 <FormField
                   name="emailNotifications"
                   control={form.control}
                   render={({ field }) => (
-                    <Switch
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
+                    <div className="flex justify-between items-center">
+                      <p>Enable Email Notifications</p>
+                      <Switch
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </div>
                   )}
                 />
               </div>

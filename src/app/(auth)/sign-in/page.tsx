@@ -3,6 +3,7 @@ import Link from 'next/link'
 import LogoWhite from 'public/assets/LogoWhite.svg'
 import { GoogleOauthButton } from '@/components/widgets/auth/GoogleOauthButton'
 import { SignInForm } from '@/app/(auth)/sign-in/form'
+import routes from '@/config/routes'
 
 export default function SignInPage() {
   return (
@@ -43,7 +44,7 @@ export default function SignInPage() {
         <h2 className="fontFamily-rubik font-bold text-[40px]">Log In</h2>
         <p className="text-[22px] mt-3">
           New to StudyCrew?{' '}
-          <Link href="/signup" className="text-primary-500 underline">
+          <Link href={routes.SIGN_UP} className="text-primary-500 underline">
             Sign Up
           </Link>
         </p>
